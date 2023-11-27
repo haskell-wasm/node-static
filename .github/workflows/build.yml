@@ -1,0 +1,45 @@
+name: build
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: build-image
+        run: |
+          pushd "$(mktemp -d)"
+          curl -f -L --retry 5 https://github.com/tweag/rust-alpine-mimalloc/archive/refs/heads/master.tar.gz | tar xz --strip-components=1
+          podman build \
+            --network host \
+            --pull \
+            --squash \
+            --tag rust:alpine-mimalloc \
+            .
+          popd
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build-node
+        run: |
+          podman run \
+            --init \
+            --network host \
+            --rm \
+            --tmpfs /tmp:exec \
+            --volume $PWD:/workspace \
+            --workdir /workspace \
+            rust:alpine-mimalloc \
+            /workspace/build.sh
+
+      - name: upload-artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-linux-x64-static
+          path: node-v*-linux-x64-static.tar.xz

@@ -1,0 +1,68 @@
+diff --git a/common.gypi b/common.gypi
+index c51dbca5..1ebcc2c4 100644
+--- a/common.gypi
++++ b/common.gypi
+@@ -176,7 +176,7 @@
+             ['llvm_version=="0.0"', {
+               'lto': ' -flto=4 -fuse-linker-plugin -ffat-lto-objects ', # GCC
+             }, {
+-              'lto': ' -flto ', # Clang
++              'lto': ' -flto=thin ', # Clang
+             }],
+           ],
+         },
+@@ -184,7 +184,7 @@
+         'conditions': [
+           ['enable_lto=="true"', {
+             'cflags': ['<(lto)'],
+-            'ldflags': ['<(lto)'],
++            'ldflags': ['<(lto)', '-fuse-ld=lld', '-Wl,--strip-all,--thinlto-cache-dir=/tmp'],
+             'xcode_settings': {
+               'LLVM_LTO': 'YES',
+             },
+diff --git a/deps/cares/configure b/deps/cares/configure
+index ebaa43c2..4f7861a8 100755
+--- a/deps/cares/configure
++++ b/deps/cares/configure
+@@ -18815,11 +18815,6 @@ _LT_EOF
+ 
+ 
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+-case "$CC $CFLAGS " in #(
+-*\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
+-*\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+-*\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+-esac
+ 
+ if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
+   (eval $ac_compile) 2>&5
+diff --git a/deps/cares/m4/libtool.m4 b/deps/cares/m4/libtool.m4
+index e7b68334..13ec17a6 100644
+--- a/deps/cares/m4/libtool.m4
++++ b/deps/cares/m4/libtool.m4
+@@ -7562,11 +7562,6 @@ _LT_EOF
+ ])
+ 
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+-case "$CC $CFLAGS " in #(
+-*\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
+-*\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+-*\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+-esac
+ 
+ dnl Parse the compiler output and extract the necessary
+ dnl objects, libraries and library flags.
+diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
+index 45323919..3cf40c59 100644
+--- a/tools/v8_gypfiles/v8.gyp
++++ b/tools/v8_gypfiles/v8.gyp
+@@ -1723,9 +1723,6 @@
+           '<!@pymod_do_main(GN-scraper "<(V8_ROOT)/BUILD.gn"  "v8_source_set.\\"v8_heap_base.*?sources = ")',
+         ],
+         'conditions': [
+-          ['enable_lto=="true"', {
+-            'cflags_cc': [ '-fno-lto' ],
+-          }],
+           ['clang or OS!="win"', {
+             'conditions': [
+               ['_toolset == "host" and host_arch == "x64" or _toolset == "target" and target_arch=="x64"', {
