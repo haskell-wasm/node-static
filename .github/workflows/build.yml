@@ -39,7 +39,7 @@ jobs:
             /workspace/build.sh
 
       - name: upload-artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: node-linux-x64-static
           path: node-v*-linux-x64-static.tar.xz
