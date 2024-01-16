@@ -16,7 +16,7 @@ index c51dbca5..1ebcc2c4 100644
            ['enable_lto=="true"', {
              'cflags': ['<(lto)'],
 -            'ldflags': ['<(lto)'],
-+            'ldflags': ['<(lto)', '-fuse-ld=lld', '-Wl,--strip-all,--thinlto-cache-dir=/tmp'],
++            'ldflags': ['<(lto)', '-fuse-ld=lld', '-latomic', '-Wl,--strip-all,--thinlto-cache-dir=/tmp'],
              'xcode_settings': {
                'LLVM_LTO': 'YES',
              },
