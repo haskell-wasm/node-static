@@ -18,7 +18,7 @@ jobs:
           podman build \
             --network host \
             --pull \
-            --squash \
+            --squash-all \
             --tag rust:alpine-mimalloc \
             .
           popd
@@ -37,6 +37,12 @@ jobs:
             --workdir /workspace \
             rust:alpine-mimalloc \
             /workspace/build.sh
+
+      - name: test-node
+        run: |
+          tar xJf node-v*-linux-x64-static.tar.xz
+          export PATH=$PWD/node-v*-linux-x64-static/bin:$PATH
+          npm install @bjorn3/browser_wasi_shim
 
       - name: upload-artifact
         uses: actions/upload-artifact@v4
