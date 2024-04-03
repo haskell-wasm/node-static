@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: setup-podman
+        uses: TerrorJack/setup-podman@master
+
       - name: build-image
         run: |
           pushd "$(mktemp -d)"
