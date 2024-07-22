@@ -2,7 +2,7 @@
 
 set -eu
 
-node_ver=v22.3.0
+node_ver=v22.5.1
 
 apk add \
   linux-headers \
