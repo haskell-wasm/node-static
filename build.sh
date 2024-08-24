@@ -2,7 +2,7 @@
 
 set -eu
 
-node_ver=v22.5.1
+node_ver=v22.7.0
 
 apk add \
   linux-headers \
@@ -12,6 +12,7 @@ apk add \
 cd "$(mktemp -d)"
 
 curl -f -L --retry 5 https://nodejs.org/dist/$node_ver/node-$node_ver.tar.xz | tar xJ --strip-components=1
+sed -i -e '/v8_enable_sandbox/d' configure.py
 patch -p1 -i /workspace/use-etc-ssl-certs.patch
 
 make -j"$(nproc)" binary \
