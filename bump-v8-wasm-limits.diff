@@ -1,0 +1,15 @@
+diff --git a/deps/v8/src/wasm/wasm-limits.h b/deps/v8/src/wasm/wasm-limits.h
+index c2a2fe6a50..56e3acd4e1 100644
+--- a/deps/v8/src/wasm/wasm-limits.h
++++ b/deps/v8/src/wasm/wasm-limits.h
+@@ -28,8 +28,8 @@ constexpr size_t kSpecMaxMemory64Pages = 262'144;  // 16GB
+ // The limits are agreed upon with other engines for consistency.
+ constexpr size_t kV8MaxWasmTypes = 1'000'000;
+ constexpr size_t kV8MaxWasmFunctions = 1'000'000;
+-constexpr size_t kV8MaxWasmImports = 100'000;
+-constexpr size_t kV8MaxWasmExports = 100'000;
++constexpr size_t kV8MaxWasmImports = 1'000'000;
++constexpr size_t kV8MaxWasmExports = 1'000'000;
+ constexpr size_t kV8MaxWasmGlobals = 1'000'000;
+ constexpr size_t kV8MaxWasmTags = 1'000'000;
+ constexpr size_t kV8MaxWasmExceptionTypes = 1'000'000;
