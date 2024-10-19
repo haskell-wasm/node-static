@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: build
+  x86_64-linux:
+    name: x86_64-linux
     runs-on: ubuntu-24.04
     steps:
 
@@ -40,7 +40,13 @@ jobs:
             --volume $PWD:/workspace \
             --workdir /workspace \
             rust:alpine-mimalloc \
-            /workspace/build.sh
+            /workspace/build-alpine.sh
+
+      - name: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-linux-x86_64
+          path: node-v*-linux-x64-static.tar.xz
 
       - name: test-node
         run: |
@@ -48,8 +54,85 @@ jobs:
           export PATH=$PWD/node-v*-linux-x64-static/bin:$PATH
           npm install @bjorn3/browser_wasi_shim
 
+  aarch64-linux:
+    name: aarch64-linux
+    runs-on: ubuntu-24.04
+    steps:
+
+      - name: setup-podman
+        uses: TerrorJack/setup-podman@master
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build-node
+        run: |
+          podman run \
+            --init \
+            --network host \
+            --rm \
+            --tmpfs /tmp:exec \
+            --volume $PWD:/workspace \
+            --workdir /workspace \
+            chimeralinux/chimera \
+            /workspace/build-chimera.sh
+
       - name: upload-artifact
         uses: actions/upload-artifact@v4
         with:
-          name: node-linux-x64-static
+          name: node-linux-aarch64
           path: node-v*-linux-x64-static.tar.xz
+
+      - name: test-node
+        run: |
+          tar xJf node-v*-linux-x64-static.tar.xz
+          export PATH=$PWD/node-v*-linux-x64-static/bin:$PATH
+          npm install @bjorn3/browser_wasi_shim
+
+  darwin:
+    name: ${{ matrix.arch }}-darwin
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - arch: aarch64
+            os: macos-15
+          - arch: x86_64
+            os: macos-15-large
+    steps:
+
+      - name: setup-xcode
+        run: |
+          sudo xcode-select --switch /Applications/Xcode_16.1.app
+
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build-node
+        run: |
+          set -euo pipefail
+
+          node_ver=v23.0.0
+
+          pushd "$(mktemp -d)"
+
+          curl -f -L --retry 5 https://github.com/nodejs/node/archive/refs/tags/$node_ver.tar.gz | tar xz --strip-components=1
+          patch -p1 -i $GITHUB_WORKSPACE/bump-v8-wasm-limits.diff
+
+          make -j$(curl -f -L --retry 5 https://gitlab.haskell.org/ghc/ghc/-/raw/master/mk/detect-cpu-count.sh | sh) binary CONFIG_FLAGS="--v8-disable-maglev"
+
+          mv node-$node_ver-*.tar.xz $GITHUB_WORKSPACE
+
+          popd
+
+      - name: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-darwin-${{ matrix.arch }}
+          path: node-v*.tar.xz
+
+      - name: test-node
+        run: |
+          tar xJf node-v*.tar.xz
+          export PATH=$PWD/node-v*/bin:$PATH
+          npm install @bjorn3/browser_wasi_shim
