@@ -2,7 +2,7 @@
 
 set -eu
 
-node_ver=v23.0.0
+node_ver=v23.1.0
 
 apk add --no-interactive \
   base-cross-aarch64 \
