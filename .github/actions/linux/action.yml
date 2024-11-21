@@ -1,0 +1,44 @@
+name: build-linux-node
+runs:
+  using: composite
+  steps:
+    - name: build-image
+      shell: bash
+      run: |
+        pushd "$(mktemp -d)"
+        curl -f -L --retry 5 https://github.com/tweag/rust-alpine-mimalloc/archive/refs/heads/master.tar.gz | tar xz --strip-components=1
+        podman build \
+          --network host \
+          --pull \
+          --squash-all \
+          --tag rust:alpine-mimalloc \
+          .
+        popd
+
+    - name: build-node
+      shell: bash
+      run: |
+        podman run \
+          --init \
+          --network host \
+          --rm \
+          --tmpfs /tmp:exec \
+          --volume $PWD:/workspace \
+          --workdir /workspace \
+          rust:alpine-mimalloc \
+          /workspace/build-alpine.sh
+
+    - name: upload-artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: node-linux-${{ matrix.arch }}
+        path: dist/node-v*.tar.xz
+
+    - name: test-node
+      shell: bash
+      run: |
+        pushd dist
+        tar xJf node-v*.tar.xz --strip-components=1
+        export PATH=$PWD/bin:$PATH
+        npm install @bjorn3/browser_wasi_shim
+        popd

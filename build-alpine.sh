@@ -2,7 +2,7 @@
 
 set -eu
 
-node_ver=v23.1.0
+node_ver=v23.3.0
 
 apk add \
   linux-headers \
@@ -19,4 +19,5 @@ make -j"$(nproc)" binary \
   CONFIG_FLAGS="--fully-static --openssl-use-def-ca-store --v8-disable-maglev" \
   VARIATION="static"
 
-mv node-$node_ver-linux-x64-static.tar.xz /workspace
+mkdir /workspace/dist
+mv node-v*.tar.xz /workspace/dist

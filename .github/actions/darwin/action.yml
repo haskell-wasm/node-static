@@ -1,0 +1,37 @@
+name: build-darwin-node
+runs:
+  using: composite
+  steps:
+    - name: build-node
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        node_ver=v23.3.0
+
+        pushd "$(mktemp -d)"
+
+        curl -f -L --retry 5 https://github.com/nodejs/node/archive/refs/tags/$node_ver.tar.gz | tar xz --strip-components=1
+        patch -p1 -i $GITHUB_WORKSPACE/bump-v8-wasm-limits.diff
+
+        make -j$(curl -f -L --retry 5 https://gitlab.haskell.org/ghc/ghc/-/raw/master/mk/detect-cpu-count.sh | sh) binary CONFIG_FLAGS="--v8-disable-maglev"
+
+        mkdir $GITHUB_WORKSPACE/dist
+        mv node-$node_ver-*.tar.xz $GITHUB_WORKSPACE/dist
+
+        popd
+
+    - name: upload-artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: node-darwin-${{ matrix.arch }}
+        path: dist/node-v*.tar.xz
+
+    - name: test-node
+      shell: bash
+      run: |
+        pushd dist
+        tar xJf node-v*.tar.xz --strip-components=1
+        export PATH=$PWD/bin:$PATH
+        npm install @bjorn3/browser_wasi_shim
+        popd
