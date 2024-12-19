@@ -1,0 +1,92 @@
+diff --git a/common.gypi b/common.gypi
+index 23196aae..4a3d643b 100644
+--- a/common.gypi
++++ b/common.gypi
+@@ -185,9 +185,9 @@
+               'MSVC_runtimeType': 2   # MultiThreadedDLL (/MD)
+             }],
+             ['clang==1', {
+-              'lto': ' -flto ', # Clang
++              'lto': ' -flto=thin ', # Clang
+             }, {
+-              'lto': ' -flto=4 -fuse-linker-plugin -ffat-lto-objects ', # GCC
++              'lto': ' -flto=auto -fuse-linker-plugin -fno-fat-lto-objects ', # GCC
+             }],
+           ],
+         },
+diff --git a/deps/cares/configure b/deps/cares/configure
+index 76b0ddf3..08b743b3 100755
+--- a/deps/cares/configure
++++ b/deps/cares/configure
+@@ -16126,11 +16126,6 @@ _LT_EOF
+ 
+ 
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+-case "$CC $CFLAGS " in #(
+-*\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
+-*\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+-*\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+-esac
+ 
+ if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
+   (eval $ac_compile) 2>&5
+diff --git a/deps/cares/m4/libtool.m4 b/deps/cares/m4/libtool.m4
+index c4c02946..9f3d3662 100755
+--- a/deps/cares/m4/libtool.m4
++++ b/deps/cares/m4/libtool.m4
+@@ -7537,11 +7537,6 @@ _LT_EOF
+ ])
+ 
+ _lt_libdeps_save_CFLAGS=$CFLAGS
+-case "$CC $CFLAGS " in #(
+-*\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
+-*\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+-*\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+-esac
+ 
+ dnl Parse the compiler output and extract the necessary
+ dnl objects, libraries and library flags.
+diff --git a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
+index 5f2c097f..42dad126 100644
+--- a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
++++ b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
+@@ -638,7 +638,7 @@ class XcodeSettings:
+         # if the system clang isn't used, DYLD_LIBRARY_PATH needs to contain the
+         # path to the libLTO.dylib that matches the used clang.
+         if self._Test("LLVM_LTO", "YES", default="NO"):
+-            cflags.append("-flto")
++            cflags.append("-flto=thin")
+ 
+         self._AppendPlatformVersionMinFlags(cflags)
+ 
+@@ -1101,7 +1101,7 @@ class XcodeSettings:
+         # For static libraries, no dSYMs are created.
+         result = []
+         if (
+-            self._Test("GCC_GENERATE_DEBUGGING_SYMBOLS", "YES", default="YES")
++            self._Test("GCC_GENERATE_DEBUGGING_SYMBOLS", "YES", default="NO")
+             and self._Test(
+                 "DEBUG_INFORMATION_FORMAT", "dwarf-with-dsym", default="dwarf"
+             )
+diff --git a/tools/gyp/pylib/gyp/xcode_emulation.py b/tools/gyp/pylib/gyp/xcode_emulation.py
+index f567542b..604f6895 100644
+--- a/tools/gyp/pylib/gyp/xcode_emulation.py
++++ b/tools/gyp/pylib/gyp/xcode_emulation.py
+@@ -638,7 +638,7 @@ class XcodeSettings:
+         # if the system clang isn't used, DYLD_LIBRARY_PATH needs to contain the
+         # path to the libLTO.dylib that matches the used clang.
+         if self._Test("LLVM_LTO", "YES", default="NO"):
+-            cflags.append("-flto")
++            cflags.append("-flto=thin")
+ 
+         self._AppendPlatformVersionMinFlags(cflags)
+ 
+@@ -1101,7 +1101,7 @@ class XcodeSettings:
+         # For static libraries, no dSYMs are created.
+         result = []
+         if (
+-            self._Test("GCC_GENERATE_DEBUGGING_SYMBOLS", "YES", default="YES")
++            self._Test("GCC_GENERATE_DEBUGGING_SYMBOLS", "YES", default="NO")
+             and self._Test(
+                 "DEBUG_INFORMATION_FORMAT", "dwarf-with-dsym", default="dwarf"
+             )

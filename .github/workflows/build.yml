@@ -7,69 +7,106 @@ on:
   workflow_dispatch:
 
 jobs:
-  x86_64-linux:
-    name: x86_64-linux
+  linux:
+    name: ${{ matrix.arch }}-linux
     runs-on:
-      - X64
+      - ${{ matrix.runner_tag }}
       - Linux
       - podman
     strategy:
       matrix:
         include:
           - arch: x86_64
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
-
-      - name: build-linux-node
-        uses: ./.github/actions/linux
-
-  aarch64-linux:
-    name: aarch64-linux
-    runs-on:
-      - ARM64
-      - Linux
-      - podman
-    strategy:
-      matrix:
-        include:
+            runner_tag: X64
           - arch: aarch64
+            runner_tag: ARM64
     steps:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: build-linux-node
-        uses: ./.github/actions/linux
+      - name: build-image
+        run: |
+          pushd "$(mktemp -d)"
+          curl -f -L --retry 5 https://github.com/tweag/rust-alpine-mimalloc/archive/refs/heads/master.tar.gz | tar xz --strip-components=1
+          podman build \
+            --network host \
+            --pull \
+            --squash-all \
+            --tag rust:alpine-mimalloc \
+            .
+          popd
 
-  aarch64-darwin:
-    name: aarch64-darwin
+      - name: build-node
+        run: |
+          podman run \
+            --init \
+            --network host \
+            --rm \
+            --tmpfs /tmp:exec \
+            --volume $PWD:/workspace \
+            --workdir /workspace \
+            rust:alpine-mimalloc \
+            /workspace/build-alpine.sh
+
+      - name: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-linux-${{ matrix.arch }}
+          path: dist/node-v*.tar.xz
+
+      - name: test-node
+        run: |
+          pushd dist
+          tar xJf node-v*.tar.xz --strip-components=1
+          export PATH=$PWD/bin:$PATH
+          npm install @bjorn3/browser_wasi_shim
+          popd
+
+  darwin:
+    name: ${{ matrix.arch }}-darwin
     runs-on:
-      - ARM64
+      - ${{ matrix.runner_tag }}
       - macOS
     strategy:
       matrix:
         include:
           - arch: aarch64
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
-
-      - name: build-darwin-node
-        uses: ./.github/actions/darwin
-
-  x86_64-darwin:
-    needs: aarch64-darwin
-    name: x86_64-darwin
-    runs-on:
-      - X64
-      - macOS
-    strategy:
-      matrix:
-        include:
+            runner_tag: ARM64
           - arch: x86_64
+            runner_tag: X64
     steps:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: build-darwin-node
-        uses: ./.github/actions/darwin
+      - name: build-node
+        run: |
+          set -euo pipefail
+
+          node_ver=v23.5.0
+
+          pushd "$(mktemp -d)"
+
+          curl -f -L --retry 5 https://github.com/nodejs/node/archive/refs/tags/$node_ver.tar.gz | tar xz --strip-components=1
+          patch -p1 -i $GITHUB_WORKSPACE/bump-v8-wasm-limits.diff
+          patch -p1 -i $GITHUB_WORKSPACE/lto.diff
+
+          make -j$(curl -f -L --retry 5 https://gitlab.haskell.org/ghc/ghc/-/raw/master/mk/detect-cpu-count.sh | sh) binary CONFIG_FLAGS="--enable-lto --v8-disable-maglev"
+
+          mkdir $GITHUB_WORKSPACE/dist
+          mv node-$node_ver-*.tar.xz $GITHUB_WORKSPACE/dist
+
+          popd
+
+      - name: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: node-darwin-${{ matrix.arch }}
+          path: dist/node-v*.tar.xz
+
+      - name: test-node
+        run: |
+          pushd dist
+          tar xJf node-v*.tar.xz --strip-components=1
+          export PATH=$PWD/bin:$PATH
+          npm install @bjorn3/browser_wasi_shim
+          popd
