@@ -2,7 +2,7 @@
 
 set -eu
 
-node_ver=v23.6.0
+node_ver=v23.6.1
 
 apk add \
   clang \
@@ -22,7 +22,8 @@ make -j"$(nproc)" binary \
   AR=llvm-ar \
   CC=clang \
   CXX=clang++ \
-  CONFIG_FLAGS="--enable-lto --fully-static --openssl-use-def-ca-store --v8-disable-maglev" \
+  CONFIG_FLAGS="--enable-lto --fully-static --openssl-use-def-ca-store" \
+  LDFLAGS=-Wl,-z,stack-size=8388608 \
   VARIATION="static"
 
 mkdir /workspace/dist

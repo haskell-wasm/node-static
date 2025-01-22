@@ -82,7 +82,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          node_ver=v23.6.0
+          node_ver=v23.6.1
 
           pushd "$(mktemp -d)"
 
@@ -90,7 +90,7 @@ jobs:
           patch -p1 -i $GITHUB_WORKSPACE/bump-v8-wasm-limits.diff
           patch -p1 -i $GITHUB_WORKSPACE/lto.diff
 
-          make -j$(curl -f -L --retry 5 https://gitlab.haskell.org/ghc/ghc/-/raw/master/mk/detect-cpu-count.sh | sh) binary CONFIG_FLAGS="--enable-lto --v8-disable-maglev"
+          make -j$(curl -f -L --retry 5 https://gitlab.haskell.org/ghc/ghc/-/raw/master/mk/detect-cpu-count.sh | sh) binary CONFIG_FLAGS="--enable-lto"
 
           mkdir $GITHUB_WORKSPACE/dist
           mv node-$node_ver-*.tar.xz $GITHUB_WORKSPACE/dist
