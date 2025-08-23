@@ -1,8 +1,8 @@
 diff --git a/common.gypi b/common.gypi
-index a6a79adc..160b6eb6 100644
+index 4a78c902..ee84e685 100644
 --- a/common.gypi
 +++ b/common.gypi
-@@ -185,9 +185,9 @@
+@@ -190,9 +190,9 @@
                'MSVC_runtimeType': 2   # MultiThreadedDLL (/MD)
              }],
              ['clang==1', {
@@ -15,10 +15,10 @@ index a6a79adc..160b6eb6 100644
            ],
          },
 diff --git a/deps/cares/configure b/deps/cares/configure
-index d02f117d..468461f7 100755
+index 7a29494d..dbb46253 100755
 --- a/deps/cares/configure
 +++ b/deps/cares/configure
-@@ -16139,11 +16139,6 @@ _LT_EOF
+@@ -16275,11 +16275,6 @@ _LT_EOF
  
  
  _lt_libdeps_save_CFLAGS=$CFLAGS
@@ -31,10 +31,10 @@ index d02f117d..468461f7 100755
  if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
    (eval $ac_compile) 2>&5
 diff --git a/deps/cares/m4/libtool.m4 b/deps/cares/m4/libtool.m4
-index c4c02946..9f3d3662 100755
+index e7b68334..13ec17a6 100755
 --- a/deps/cares/m4/libtool.m4
 +++ b/deps/cares/m4/libtool.m4
-@@ -7537,11 +7537,6 @@ _LT_EOF
+@@ -7562,11 +7562,6 @@ _LT_EOF
  ])
  
  _lt_libdeps_save_CFLAGS=$CFLAGS
@@ -47,10 +47,10 @@ index c4c02946..9f3d3662 100755
  dnl Parse the compiler output and extract the necessary
  dnl objects, libraries and library flags.
 diff --git a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
-index 5f2c097f..42dad126 100644
+index 85a63dfd..9c262c9f 100644
 --- a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
 +++ b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
-@@ -638,7 +638,7 @@ class XcodeSettings:
+@@ -636,7 +636,7 @@ class XcodeSettings:
          # if the system clang isn't used, DYLD_LIBRARY_PATH needs to contain the
          # path to the libLTO.dylib that matches the used clang.
          if self._Test("LLVM_LTO", "YES", default="NO"):
@@ -59,7 +59,7 @@ index 5f2c097f..42dad126 100644
  
          self._AppendPlatformVersionMinFlags(cflags)
  
-@@ -1101,7 +1101,7 @@ class XcodeSettings:
+@@ -1099,7 +1099,7 @@ class XcodeSettings:
          # For static libraries, no dSYMs are created.
          result = []
          if (
@@ -69,7 +69,7 @@ index 5f2c097f..42dad126 100644
                  "DEBUG_INFORMATION_FORMAT", "dwarf-with-dsym", default="dwarf"
              )
 diff --git a/deps/openssl/openssl-cli.gypi b/deps/openssl/openssl-cli.gypi
-index b4c278b4..79cafd6b 100644
+index ae74be9a..4e8517e5 100644
 --- a/deps/openssl/openssl-cli.gypi
 +++ b/deps/openssl/openssl-cli.gypi
 @@ -23,7 +23,7 @@
@@ -95,10 +95,10 @@ index ea3a2dc0..ea3780f7 100644
       ]
      }, {
 diff --git a/node.gyp b/node.gyp
-index a3688b8e..d320299f 100644
+index bcf01a6b..e5495afc 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -1069,7 +1069,7 @@
+@@ -1080,7 +1080,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -107,7 +107,7 @@ index a3688b8e..d320299f 100644
          }],
        ],
      }, # fuzz_env
-@@ -1112,7 +1112,7 @@
+@@ -1123,7 +1123,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -116,7 +116,7 @@ index a3688b8e..d320299f 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1157,7 +1157,7 @@
+@@ -1168,7 +1168,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -125,7 +125,7 @@ index a3688b8e..d320299f 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1235,7 +1235,7 @@
+@@ -1256,7 +1256,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -134,7 +134,7 @@ index a3688b8e..d320299f 100644
          }],
        ],
      }, # cctest
-@@ -1291,7 +1291,7 @@
+@@ -1312,7 +1312,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -143,7 +143,7 @@ index a3688b8e..d320299f 100644
          }],
        ],
      }, # embedtest
-@@ -1333,7 +1333,7 @@
+@@ -1334,7 +1334,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -152,7 +152,7 @@ index a3688b8e..d320299f 100644
          }],
        ]
      }, # overlapped-checker
-@@ -1439,7 +1439,7 @@
+@@ -1447,7 +1447,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -162,10 +162,10 @@ index a3688b8e..d320299f 100644
        ],
      }, # node_mksnapshot
 diff --git a/tools/gyp/pylib/gyp/xcode_emulation.py b/tools/gyp/pylib/gyp/xcode_emulation.py
-index aee1a542..162881d1 100644
+index 0746865d..a4b15d6a 100644
 --- a/tools/gyp/pylib/gyp/xcode_emulation.py
 +++ b/tools/gyp/pylib/gyp/xcode_emulation.py
-@@ -638,7 +638,7 @@ class XcodeSettings:
+@@ -636,7 +636,7 @@ class XcodeSettings:
          # if the system clang isn't used, DYLD_LIBRARY_PATH needs to contain the
          # path to the libLTO.dylib that matches the used clang.
          if self._Test("LLVM_LTO", "YES", default="NO"):
@@ -174,7 +174,7 @@ index aee1a542..162881d1 100644
  
          self._AppendPlatformVersionMinFlags(cflags)
  
-@@ -1101,7 +1101,7 @@ class XcodeSettings:
+@@ -1099,7 +1099,7 @@ class XcodeSettings:
          # For static libraries, no dSYMs are created.
          result = []
          if (
@@ -224,7 +224,7 @@ index f007c652..ac69a873 100644
        ],
      },
 diff --git a/tools/v8_gypfiles/d8.gyp b/tools/v8_gypfiles/d8.gyp
-index 4dd98972..27165061 100644
+index f5f8a194..d2a6306e 100644
 --- a/tools/v8_gypfiles/d8.gyp
 +++ b/tools/v8_gypfiles/d8.gyp
 @@ -65,7 +65,7 @@
@@ -237,10 +237,10 @@ index 4dd98972..27165061 100644
        ],
      },
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index 88c1297b..a640a7ff 100644
+index 32f00097..e7db9d49 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -1690,7 +1690,7 @@
+@@ -1706,7 +1706,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -249,7 +249,7 @@ index 88c1297b..a640a7ff 100644
          }],
        ],
        'defines!': [
-@@ -1752,7 +1752,7 @@
+@@ -1768,7 +1768,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -258,7 +258,7 @@ index 88c1297b..a640a7ff 100644
          }],
        ],
      },  # mksnapshot
-@@ -1769,7 +1769,7 @@
+@@ -1786,7 +1786,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -267,7 +267,7 @@ index 88c1297b..a640a7ff 100644
          }],
        ],
        'defines!': [
-@@ -1807,7 +1807,7 @@
+@@ -1824,7 +1824,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -276,7 +276,7 @@ index 88c1297b..a640a7ff 100644
          }],
        ],
        'dependencies': [
-@@ -1843,7 +1843,7 @@
+@@ -1861,7 +1861,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -285,7 +285,7 @@ index 88c1297b..a640a7ff 100644
          }],
        ],
        'sources': [
-@@ -1863,7 +1863,7 @@
+@@ -1881,7 +1881,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -294,7 +294,7 @@ index 88c1297b..a640a7ff 100644
          }],
        ],
        'actions': [
-@@ -1931,7 +1931,7 @@
+@@ -1949,7 +1949,7 @@
          ],
          'conditions': [
            ['enable_lto=="true"', {
