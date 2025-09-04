@@ -1,5 +1,5 @@
 diff --git a/common.gypi b/common.gypi
-index 4a78c902..ee84e685 100644
+index d4605a52..794e810b 100644
 --- a/common.gypi
 +++ b/common.gypi
 @@ -190,9 +190,9 @@
@@ -95,10 +95,10 @@ index ea3a2dc0..ea3780f7 100644
       ]
      }, {
 diff --git a/node.gyp b/node.gyp
-index bcf01a6b..e5495afc 100644
+index 51863d37..3a7cf5a9 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -1080,7 +1080,7 @@
+@@ -1084,7 +1084,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -107,7 +107,7 @@ index bcf01a6b..e5495afc 100644
          }],
        ],
      }, # fuzz_env
-@@ -1123,7 +1123,7 @@
+@@ -1127,7 +1127,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -116,7 +116,7 @@ index bcf01a6b..e5495afc 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1168,7 +1168,7 @@
+@@ -1172,7 +1172,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -125,7 +125,7 @@ index bcf01a6b..e5495afc 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1256,7 +1256,7 @@
+@@ -1260,7 +1260,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -134,7 +134,7 @@ index bcf01a6b..e5495afc 100644
          }],
        ],
      }, # cctest
-@@ -1312,7 +1312,7 @@
+@@ -1316,7 +1316,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -143,7 +143,7 @@ index bcf01a6b..e5495afc 100644
          }],
        ],
      }, # embedtest
-@@ -1334,7 +1334,7 @@
+@@ -1338,7 +1338,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -152,7 +152,7 @@ index bcf01a6b..e5495afc 100644
          }],
        ]
      }, # overlapped-checker
-@@ -1447,7 +1447,7 @@
+@@ -1451,7 +1451,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -162,7 +162,7 @@ index bcf01a6b..e5495afc 100644
        ],
      }, # node_mksnapshot
 diff --git a/tools/gyp/pylib/gyp/xcode_emulation.py b/tools/gyp/pylib/gyp/xcode_emulation.py
-index 0746865d..a4b15d6a 100644
+index 08e645c5..6b5e35d3 100644
 --- a/tools/gyp/pylib/gyp/xcode_emulation.py
 +++ b/tools/gyp/pylib/gyp/xcode_emulation.py
 @@ -636,7 +636,7 @@ class XcodeSettings:
