@@ -1,5 +1,5 @@
 diff --git a/common.gypi b/common.gypi
-index d4605a52..794e810b 100644
+index 0d2fe4d9..dc150c1d 100644
 --- a/common.gypi
 +++ b/common.gypi
 @@ -190,9 +190,9 @@
@@ -95,7 +95,7 @@ index ea3a2dc0..ea3780f7 100644
       ]
      }, {
 diff --git a/node.gyp b/node.gyp
-index 51863d37..3a7cf5a9 100644
+index 420d5713..83c50eb9 100644
 --- a/node.gyp
 +++ b/node.gyp
 @@ -1084,7 +1084,7 @@
@@ -107,7 +107,7 @@ index 51863d37..3a7cf5a9 100644
          }],
        ],
      }, # fuzz_env
-@@ -1127,7 +1127,7 @@
+@@ -1129,7 +1129,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -116,7 +116,7 @@ index 51863d37..3a7cf5a9 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1172,7 +1172,7 @@
+@@ -1176,7 +1176,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -125,7 +125,7 @@ index 51863d37..3a7cf5a9 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1260,7 +1260,7 @@
+@@ -1264,7 +1264,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -134,7 +134,7 @@ index 51863d37..3a7cf5a9 100644
          }],
        ],
      }, # cctest
-@@ -1316,7 +1316,7 @@
+@@ -1320,7 +1320,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -143,7 +143,7 @@ index 51863d37..3a7cf5a9 100644
          }],
        ],
      }, # embedtest
-@@ -1338,7 +1338,7 @@
+@@ -1342,7 +1342,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -152,7 +152,7 @@ index 51863d37..3a7cf5a9 100644
          }],
        ]
      }, # overlapped-checker
-@@ -1451,7 +1451,7 @@
+@@ -1455,7 +1455,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -162,10 +162,10 @@ index 51863d37..3a7cf5a9 100644
        ],
      }, # node_mksnapshot
 diff --git a/tools/gyp/pylib/gyp/xcode_emulation.py b/tools/gyp/pylib/gyp/xcode_emulation.py
-index 08e645c5..6b5e35d3 100644
+index 192a5235..421076fb 100644
 --- a/tools/gyp/pylib/gyp/xcode_emulation.py
 +++ b/tools/gyp/pylib/gyp/xcode_emulation.py
-@@ -636,7 +636,7 @@ class XcodeSettings:
+@@ -635,7 +635,7 @@ class XcodeSettings:
          # if the system clang isn't used, DYLD_LIBRARY_PATH needs to contain the
          # path to the libLTO.dylib that matches the used clang.
          if self._Test("LLVM_LTO", "YES", default="NO"):
@@ -174,7 +174,7 @@ index 08e645c5..6b5e35d3 100644
  
          self._AppendPlatformVersionMinFlags(cflags)
  
-@@ -1099,7 +1099,7 @@ class XcodeSettings:
+@@ -1097,7 +1097,7 @@ class XcodeSettings:
          # For static libraries, no dSYMs are created.
          result = []
          if (
