@@ -1,5 +1,5 @@
 diff --git a/common.gypi b/common.gypi
-index 0d2fe4d9..dc150c1d 100644
+index 7727dfc4..b5ded457 100644
 --- a/common.gypi
 +++ b/common.gypi
 @@ -190,9 +190,9 @@
@@ -47,10 +47,10 @@ index e7b68334..13ec17a6 100755
  dnl Parse the compiler output and extract the necessary
  dnl objects, libraries and library flags.
 diff --git a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
-index 85a63dfd..9c262c9f 100644
+index 192a5235..421076fb 100644
 --- a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
 +++ b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
-@@ -636,7 +636,7 @@ class XcodeSettings:
+@@ -635,7 +635,7 @@ class XcodeSettings:
          # if the system clang isn't used, DYLD_LIBRARY_PATH needs to contain the
          # path to the libLTO.dylib that matches the used clang.
          if self._Test("LLVM_LTO", "YES", default="NO"):
@@ -59,7 +59,7 @@ index 85a63dfd..9c262c9f 100644
  
          self._AppendPlatformVersionMinFlags(cflags)
  
-@@ -1099,7 +1099,7 @@ class XcodeSettings:
+@@ -1097,7 +1097,7 @@ class XcodeSettings:
          # For static libraries, no dSYMs are created.
          result = []
          if (
