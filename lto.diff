@@ -1,8 +1,8 @@
 diff --git a/common.gypi b/common.gypi
-index 7727dfc4..b5ded457 100644
+index 592c4e92..c545c50e 100644
 --- a/common.gypi
 +++ b/common.gypi
-@@ -190,9 +190,9 @@
+@@ -187,9 +187,9 @@
                'MSVC_runtimeType': 2   # MultiThreadedDLL (/MD)
              }],
              ['clang==1', {
@@ -95,10 +95,10 @@ index ea3a2dc0..ea3780f7 100644
       ]
      }, {
 diff --git a/node.gyp b/node.gyp
-index 420d5713..83c50eb9 100644
+index e22dce67..e30d9a5b 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -1084,7 +1084,7 @@
+@@ -1082,7 +1082,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -107,7 +107,7 @@ index 420d5713..83c50eb9 100644
          }],
        ],
      }, # fuzz_env
-@@ -1129,7 +1129,7 @@
+@@ -1127,7 +1127,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -116,7 +116,7 @@ index 420d5713..83c50eb9 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1176,7 +1176,7 @@
+@@ -1174,7 +1174,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -125,7 +125,7 @@ index 420d5713..83c50eb9 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1264,7 +1264,7 @@
+@@ -1262,7 +1262,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -134,7 +134,7 @@ index 420d5713..83c50eb9 100644
          }],
        ],
      }, # cctest
-@@ -1320,7 +1320,7 @@
+@@ -1318,7 +1318,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -143,7 +143,7 @@ index 420d5713..83c50eb9 100644
          }],
        ],
      }, # embedtest
-@@ -1342,7 +1342,7 @@
+@@ -1340,7 +1340,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -152,7 +152,7 @@ index 420d5713..83c50eb9 100644
          }],
        ]
      }, # overlapped-checker
-@@ -1455,7 +1455,7 @@
+@@ -1453,7 +1453,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -237,10 +237,10 @@ index f5f8a194..d2a6306e 100644
        ],
      },
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index 32f00097..e7db9d49 100644
+index 2d5e78b3..81d6e5cf 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -1706,7 +1706,7 @@
+@@ -1735,7 +1735,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -249,7 +249,7 @@ index 32f00097..e7db9d49 100644
          }],
        ],
        'defines!': [
-@@ -1768,7 +1768,7 @@
+@@ -1797,7 +1797,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -258,7 +258,7 @@ index 32f00097..e7db9d49 100644
          }],
        ],
      },  # mksnapshot
-@@ -1786,7 +1786,7 @@
+@@ -1815,7 +1815,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -267,7 +267,7 @@ index 32f00097..e7db9d49 100644
          }],
        ],
        'defines!': [
-@@ -1824,7 +1824,7 @@
+@@ -1853,7 +1853,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -276,7 +276,7 @@ index 32f00097..e7db9d49 100644
          }],
        ],
        'dependencies': [
-@@ -1861,7 +1861,7 @@
+@@ -1890,7 +1890,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -285,7 +285,7 @@ index 32f00097..e7db9d49 100644
          }],
        ],
        'sources': [
-@@ -1881,7 +1881,7 @@
+@@ -1910,7 +1910,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -294,7 +294,7 @@ index 32f00097..e7db9d49 100644
          }],
        ],
        'actions': [
-@@ -1949,7 +1949,7 @@
+@@ -1978,7 +1978,7 @@
          ],
          'conditions': [
            ['enable_lto=="true"', {
