@@ -1,5 +1,5 @@
 diff --git a/common.gypi b/common.gypi
-index 592c4e92..c545c50e 100644
+index 55476f5c..3b058a69 100644
 --- a/common.gypi
 +++ b/common.gypi
 @@ -187,9 +187,9 @@
@@ -95,10 +95,10 @@ index ea3a2dc0..ea3780f7 100644
       ]
      }, {
 diff --git a/node.gyp b/node.gyp
-index e22dce67..e30d9a5b 100644
+index 2f4934b9..f4e9401b 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -1082,7 +1082,7 @@
+@@ -1096,7 +1096,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -107,7 +107,7 @@ index e22dce67..e30d9a5b 100644
          }],
        ],
      }, # fuzz_env
-@@ -1127,7 +1127,7 @@
+@@ -1141,7 +1141,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -116,7 +116,7 @@ index e22dce67..e30d9a5b 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1174,7 +1174,7 @@
+@@ -1188,7 +1188,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -125,7 +125,7 @@ index e22dce67..e30d9a5b 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1262,7 +1262,7 @@
+@@ -1276,7 +1276,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -134,7 +134,7 @@ index e22dce67..e30d9a5b 100644
          }],
        ],
      }, # cctest
-@@ -1318,7 +1318,7 @@
+@@ -1332,7 +1332,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -143,7 +143,7 @@ index e22dce67..e30d9a5b 100644
          }],
        ],
      }, # embedtest
-@@ -1340,7 +1340,7 @@
+@@ -1354,7 +1354,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -152,7 +152,7 @@ index e22dce67..e30d9a5b 100644
          }],
        ]
      }, # overlapped-checker
-@@ -1453,7 +1453,7 @@
+@@ -1467,7 +1467,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -162,7 +162,7 @@ index e22dce67..e30d9a5b 100644
        ],
      }, # node_mksnapshot
 diff --git a/tools/gyp/pylib/gyp/xcode_emulation.py b/tools/gyp/pylib/gyp/xcode_emulation.py
-index 192a5235..421076fb 100644
+index d13eaa9a..f67917c7 100644
 --- a/tools/gyp/pylib/gyp/xcode_emulation.py
 +++ b/tools/gyp/pylib/gyp/xcode_emulation.py
 @@ -635,7 +635,7 @@ class XcodeSettings:
@@ -237,10 +237,10 @@ index f5f8a194..d2a6306e 100644
        ],
      },
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index 2d5e78b3..81d6e5cf 100644
+index c3ec7e3e..b6829961 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -1735,7 +1735,7 @@
+@@ -1744,7 +1744,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -249,7 +249,7 @@ index 2d5e78b3..81d6e5cf 100644
          }],
        ],
        'defines!': [
-@@ -1797,7 +1797,7 @@
+@@ -1806,7 +1806,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -258,7 +258,7 @@ index 2d5e78b3..81d6e5cf 100644
          }],
        ],
      },  # mksnapshot
-@@ -1815,7 +1815,7 @@
+@@ -1824,7 +1824,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -267,7 +267,7 @@ index 2d5e78b3..81d6e5cf 100644
          }],
        ],
        'defines!': [
-@@ -1853,7 +1853,7 @@
+@@ -1862,7 +1862,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -276,7 +276,7 @@ index 2d5e78b3..81d6e5cf 100644
          }],
        ],
        'dependencies': [
-@@ -1890,7 +1890,7 @@
+@@ -1899,7 +1899,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -285,7 +285,7 @@ index 2d5e78b3..81d6e5cf 100644
          }],
        ],
        'sources': [
-@@ -1910,7 +1910,7 @@
+@@ -1919,7 +1919,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -294,7 +294,7 @@ index 2d5e78b3..81d6e5cf 100644
          }],
        ],
        'actions': [
-@@ -1978,7 +1978,7 @@
+@@ -1987,7 +1987,7 @@
          ],
          'conditions': [
            ['enable_lto=="true"', {
