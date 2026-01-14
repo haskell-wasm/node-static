@@ -1,5 +1,5 @@
 diff --git a/common.gypi b/common.gypi
-index b1858065..72be2b91 100644
+index b915af23..fd954090 100644
 --- a/common.gypi
 +++ b/common.gypi
 @@ -187,9 +187,9 @@
@@ -15,10 +15,10 @@ index b1858065..72be2b91 100644
            ],
          },
 diff --git a/deps/cares/configure b/deps/cares/configure
-index 7a29494d..dbb46253 100755
+index f91e2c95..90ff1b76 100755
 --- a/deps/cares/configure
 +++ b/deps/cares/configure
-@@ -16275,11 +16275,6 @@ _LT_EOF
+@@ -17165,11 +17165,6 @@ _LT_EOF
  
  
  _lt_libdeps_save_CFLAGS=$CFLAGS

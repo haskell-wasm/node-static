@@ -22,7 +22,7 @@ jobs:
             runner_tag: ARM64
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: build-image
         run: |
@@ -51,7 +51,7 @@ jobs:
           podman rmi rust:alpine-mimalloc
 
       - name: upload-artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: node-linux-${{ matrix.arch }}
           path: dist/node-v*.tar.xz

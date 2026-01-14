@@ -2,7 +2,7 @@
 
 set -eu
 
-node_ver=v25.2.1
+node_ver=v25.3.0
 
 apk add \
   clang \
@@ -13,7 +13,7 @@ apk add \
 
 cd "$(mktemp -d)"
 
-curl -f -L --retry 5 https://nodejs.org/dist/$node_ver/node-$node_ver.tar.xz | tar xJ --strip-components=1
+curl -f -L https://nodejs.org/dist/$node_ver/node-$node_ver.tar.xz | tar xJ --strip-components=1
 patch -p1 -i /workspace/lto.diff
 
 make -j"$(nproc)" binary \
