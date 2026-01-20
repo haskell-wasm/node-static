@@ -1,5 +1,5 @@
 diff --git a/common.gypi b/common.gypi
-index b915af23..fd954090 100644
+index cefbc431..fd47fa15 100644
 --- a/common.gypi
 +++ b/common.gypi
 @@ -187,9 +187,9 @@
@@ -47,7 +47,7 @@ index e7b68334..13ec17a6 100755
  dnl Parse the compiler output and extract the necessary
  dnl objects, libraries and library flags.
 diff --git a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
-index 192a5235..421076fb 100644
+index d13eaa9a..f67917c7 100644
 --- a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
 +++ b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
 @@ -635,7 +635,7 @@ class XcodeSettings:
@@ -95,10 +95,10 @@ index ea3a2dc0..ea3780f7 100644
       ]
      }, {
 diff --git a/node.gyp b/node.gyp
-index a80260ba..ada17215 100644
+index df8d67d3..0e0567ee 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -1099,7 +1099,7 @@
+@@ -1115,7 +1115,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -107,7 +107,7 @@ index a80260ba..ada17215 100644
          }],
        ],
      }, # fuzz_env
-@@ -1144,7 +1144,7 @@
+@@ -1164,7 +1164,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -116,7 +116,7 @@ index a80260ba..ada17215 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1191,7 +1191,7 @@
+@@ -1219,7 +1219,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -125,7 +125,7 @@ index a80260ba..ada17215 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1279,7 +1279,7 @@
+@@ -1318,7 +1318,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -134,7 +134,7 @@ index a80260ba..ada17215 100644
          }],
        ],
      }, # cctest
-@@ -1335,7 +1335,7 @@
+@@ -1378,7 +1378,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -143,7 +143,7 @@ index a80260ba..ada17215 100644
          }],
        ],
      }, # embedtest
-@@ -1357,7 +1357,7 @@
+@@ -1400,7 +1400,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -152,7 +152,7 @@ index a80260ba..ada17215 100644
          }],
        ]
      }, # overlapped-checker
-@@ -1470,7 +1470,7 @@
+@@ -1519,7 +1519,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -237,10 +237,10 @@ index f5f8a194..d2a6306e 100644
        ],
      },
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index c3ec7e3e..b6829961 100644
+index f323d8fb..46d33932 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -1744,7 +1744,7 @@
+@@ -1780,7 +1780,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -249,7 +249,7 @@ index c3ec7e3e..b6829961 100644
          }],
        ],
        'defines!': [
-@@ -1806,7 +1806,7 @@
+@@ -1843,7 +1843,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -258,7 +258,7 @@ index c3ec7e3e..b6829961 100644
          }],
        ],
      },  # mksnapshot
-@@ -1824,7 +1824,7 @@
+@@ -1861,7 +1861,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -267,7 +267,7 @@ index c3ec7e3e..b6829961 100644
          }],
        ],
        'defines!': [
-@@ -1862,7 +1862,7 @@
+@@ -1900,7 +1900,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -276,7 +276,7 @@ index c3ec7e3e..b6829961 100644
          }],
        ],
        'dependencies': [
-@@ -1899,7 +1899,7 @@
+@@ -1938,7 +1938,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -285,7 +285,7 @@ index c3ec7e3e..b6829961 100644
          }],
        ],
        'sources': [
-@@ -1919,7 +1919,7 @@
+@@ -1958,7 +1958,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -294,7 +294,7 @@ index c3ec7e3e..b6829961 100644
          }],
        ],
        'actions': [
-@@ -1987,7 +1987,7 @@
+@@ -2026,7 +2026,7 @@
          ],
          'conditions': [
            ['enable_lto=="true"', {
