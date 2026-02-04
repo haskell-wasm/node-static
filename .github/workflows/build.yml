@@ -28,7 +28,7 @@ jobs:
         run: |
           pushd "$(mktemp -d)"
           curl -f -L --retry 5 https://github.com/tweag/rust-alpine-mimalloc/archive/refs/heads/master.tar.gz | tar xz --strip-components=1
-          podman build \
+          podman --remote build \
             --network host \
             --pull \
             --squash-all \
@@ -38,7 +38,7 @@ jobs:
 
       - name: build-node
         run: |
-          podman run \
+          podman --remote run \
             --init \
             --network host \
             --rm \
@@ -48,7 +48,7 @@ jobs:
             rust:alpine-mimalloc \
             /workspace/build-alpine.sh
 
-          podman rmi rust:alpine-mimalloc
+          podman --remote rmi rust:alpine-mimalloc
 
       - name: upload-artifact
         uses: actions/upload-artifact@v6
