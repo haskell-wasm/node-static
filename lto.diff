@@ -95,10 +95,10 @@ index ea3a2dc0..ea3780f7 100644
       ]
      }, {
 diff --git a/node.gyp b/node.gyp
-index 47ec88c4..c1deeba4 100644
+index d24707e8..01a75e28 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -1156,7 +1156,7 @@
+@@ -1158,7 +1158,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -107,7 +107,7 @@ index 47ec88c4..c1deeba4 100644
          }],
        ],
      }, # fuzz_env
-@@ -1205,7 +1205,7 @@
+@@ -1207,7 +1207,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -116,7 +116,7 @@ index 47ec88c4..c1deeba4 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1264,7 +1264,7 @@
+@@ -1266,7 +1266,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -125,7 +125,7 @@ index 47ec88c4..c1deeba4 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1374,7 +1374,7 @@
+@@ -1376,7 +1376,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -134,7 +134,7 @@ index 47ec88c4..c1deeba4 100644
          }],
        ],
      }, # cctest
-@@ -1438,7 +1438,7 @@
+@@ -1440,7 +1440,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -143,7 +143,7 @@ index 47ec88c4..c1deeba4 100644
          }],
        ],
      }, # embedtest
-@@ -1515,7 +1515,7 @@
+@@ -1517,7 +1517,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -152,7 +152,7 @@ index 47ec88c4..c1deeba4 100644
          }],
        ]
      }, # overlapped-checker
-@@ -1641,7 +1641,7 @@
+@@ -1643,7 +1643,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
