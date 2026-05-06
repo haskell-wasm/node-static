@@ -1,75 +1,45 @@
 diff --git a/common.gypi b/common.gypi
-index bf66a942..dc1c66b7 100644
+index dbd6bf9d..22d76117 100644
 --- a/common.gypi
 +++ b/common.gypi
-@@ -187,9 +187,9 @@
+@@ -189,9 +189,9 @@
                'MSVC_runtimeType': 2   # MultiThreadedDLL (/MD)
              }],
              ['clang==1', {
 -              'lto': ' -flto ', # Clang
 +              'lto': ' -flto=thin ', # Clang
              }, {
--              'lto': ' -flto=4 -fuse-linker-plugin -ffat-lto-objects ', # GCC
-+              'lto': ' -flto=auto -fuse-linker-plugin -fno-fat-lto-objects ', # GCC
+-              'lto': ' -flto=4 -ffat-lto-objects ', # GCC
++              'lto': ' -flto=auto -fno-fat-lto-objects ', # GCC
              }],
            ],
          },
 diff --git a/deps/cares/configure b/deps/cares/configure
-index f91e2c95..90ff1b76 100755
+index f91e2c95..84a09a59 100755
 --- a/deps/cares/configure
 +++ b/deps/cares/configure
-@@ -17165,11 +17165,6 @@ _LT_EOF
- 
+@@ -17166,7 +17166,6 @@ _LT_EOF
  
  _lt_libdeps_save_CFLAGS=$CFLAGS
--case "$CC $CFLAGS " in #(
+ case "$CC $CFLAGS " in #(
 -*\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
--*\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
--*\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
--esac
- 
- if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
-   (eval $ac_compile) 2>&5
+ *\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+ *\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+ esac
 diff --git a/deps/cares/m4/libtool.m4 b/deps/cares/m4/libtool.m4
-index e7b68334..13ec17a6 100755
+index e7b68334..27a30926 100755
 --- a/deps/cares/m4/libtool.m4
 +++ b/deps/cares/m4/libtool.m4
-@@ -7562,11 +7562,6 @@ _LT_EOF
- ])
+@@ -7563,7 +7563,6 @@ _LT_EOF
  
  _lt_libdeps_save_CFLAGS=$CFLAGS
--case "$CC $CFLAGS " in #(
+ case "$CC $CFLAGS " in #(
 -*\ -flto*\ *) CFLAGS="$CFLAGS -fno-lto" ;;
--*\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
--*\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
--esac
- 
- dnl Parse the compiler output and extract the necessary
- dnl objects, libraries and library flags.
-diff --git a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
-index d13eaa9a..f67917c7 100644
---- a/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
-+++ b/deps/npm/node_modules/node-gyp/gyp/pylib/gyp/xcode_emulation.py
-@@ -635,7 +635,7 @@ class XcodeSettings:
-         # if the system clang isn't used, DYLD_LIBRARY_PATH needs to contain the
-         # path to the libLTO.dylib that matches the used clang.
-         if self._Test("LLVM_LTO", "YES", default="NO"):
--            cflags.append("-flto")
-+            cflags.append("-flto=thin")
- 
-         self._AppendPlatformVersionMinFlags(cflags)
- 
-@@ -1097,7 +1097,7 @@ class XcodeSettings:
-         # For static libraries, no dSYMs are created.
-         result = []
-         if (
--            self._Test("GCC_GENERATE_DEBUGGING_SYMBOLS", "YES", default="YES")
-+            self._Test("GCC_GENERATE_DEBUGGING_SYMBOLS", "YES", default="NO")
-             and self._Test(
-                 "DEBUG_INFORMATION_FORMAT", "dwarf-with-dsym", default="dwarf"
-             )
+ *\ -fwhopr*\ *) CFLAGS="$CFLAGS -fno-whopr" ;;
+ *\ -fuse-linker-plugin*\ *) CFLAGS="$CFLAGS -fno-use-linker-plugin" ;;
+ esac
 diff --git a/deps/openssl/openssl-cli.gypi b/deps/openssl/openssl-cli.gypi
-index ae74be9a..4e8517e5 100644
+index da03938f..00057f89 100644
 --- a/deps/openssl/openssl-cli.gypi
 +++ b/deps/openssl/openssl-cli.gypi
 @@ -23,7 +23,7 @@
@@ -79,10 +49,10 @@ index ae74be9a..4e8517e5 100644
 -      'ldflags': [ '-fno-lto' ],
 +      'ldflags': [],
      }],
-   ],
- }
+     ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+       'msvs_settings': {
 diff --git a/deps/openssl/openssl.gyp b/deps/openssl/openssl.gyp
-index ea3a2dc0..ea3780f7 100644
+index 4d8d16f0..3a770c37 100644
 --- a/deps/openssl/openssl.gyp
 +++ b/deps/openssl/openssl.gyp
 @@ -75,7 +75,7 @@
@@ -92,13 +62,13 @@ index ea3a2dc0..ea3780f7 100644
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-      ]
-     }, {
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
 diff --git a/node.gyp b/node.gyp
-index bd77943b..71525b70 100644
+index b129c3db..9c685df4 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -1178,7 +1178,7 @@
+@@ -1229,7 +1229,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -107,7 +77,7 @@ index bd77943b..71525b70 100644
          }],
        ],
      }, # fuzz_env
-@@ -1227,7 +1227,7 @@
+@@ -1278,7 +1278,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -116,7 +86,7 @@ index bd77943b..71525b70 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1286,7 +1286,7 @@
+@@ -1337,7 +1337,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -125,66 +95,44 @@ index bd77943b..71525b70 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1398,7 +1398,7 @@
+@@ -1449,7 +1449,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     }, # cctest
-@@ -1462,7 +1462,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -1523,7 +1523,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     }, # embedtest
-@@ -1539,7 +1539,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -1610,7 +1610,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ]
-     }, # overlapped-checker
-@@ -1665,7 +1665,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -1746,7 +1746,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     }, # node_mksnapshot
-diff --git a/tools/gyp/pylib/gyp/xcode_emulation.py b/tools/gyp/pylib/gyp/xcode_emulation.py
-index d13eaa9a..f67917c7 100644
---- a/tools/gyp/pylib/gyp/xcode_emulation.py
-+++ b/tools/gyp/pylib/gyp/xcode_emulation.py
-@@ -635,7 +635,7 @@ class XcodeSettings:
-         # if the system clang isn't used, DYLD_LIBRARY_PATH needs to contain the
-         # path to the libLTO.dylib that matches the used clang.
-         if self._Test("LLVM_LTO", "YES", default="NO"):
--            cflags.append("-flto")
-+            cflags.append("-flto=thin")
- 
-         self._AppendPlatformVersionMinFlags(cflags)
- 
-@@ -1097,7 +1097,7 @@ class XcodeSettings:
-         # For static libraries, no dSYMs are created.
-         result = []
-         if (
--            self._Test("GCC_GENERATE_DEBUGGING_SYMBOLS", "YES", default="YES")
-+            self._Test("GCC_GENERATE_DEBUGGING_SYMBOLS", "YES", default="NO")
-             and self._Test(
-                 "DEBUG_INFORMATION_FORMAT", "dwarf-with-dsym", default="dwarf"
-             )
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
 diff --git a/tools/icu/icu-generic.gyp b/tools/icu/icu-generic.gyp
-index f007c652..ac69a873 100644
+index f49b4ddb..40187c33 100644
 --- a/tools/icu/icu-generic.gyp
 +++ b/tools/icu/icu-generic.gyp
 @@ -454,7 +454,7 @@
@@ -194,37 +142,37 @@ index f007c652..ac69a873 100644
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     },
-@@ -471,7 +471,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -481,7 +481,7 @@
        'conditions': [
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     },
-@@ -489,7 +489,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -509,7 +509,7 @@
        'conditions': [
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     },
-@@ -506,7 +506,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -536,7 +536,7 @@
        'conditions': [
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     },
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
 diff --git a/tools/v8_gypfiles/d8.gyp b/tools/v8_gypfiles/d8.gyp
-index f5f8a194..d2a6306e 100644
+index 5b47ebf1..a77f8de6 100644
 --- a/tools/v8_gypfiles/d8.gyp
 +++ b/tools/v8_gypfiles/d8.gyp
 @@ -65,7 +65,7 @@
@@ -234,72 +182,72 @@ index f5f8a194..d2a6306e 100644
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     },
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index e09fcc1c..1220dd3b 100644
+index 945aa0aa..38054a4e 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -1789,7 +1789,7 @@
+@@ -1738,7 +1738,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-       'defines!': [
-@@ -1852,7 +1852,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -1810,7 +1810,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-     },  # mksnapshot
-@@ -1870,7 +1870,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -1838,7 +1838,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-       'defines!': [
-@@ -1909,7 +1909,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -1887,7 +1887,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-       'dependencies': [
-@@ -1947,7 +1947,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -1935,7 +1935,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-       'sources': [
-@@ -1967,7 +1967,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -1965,7 +1965,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
 -          'ldflags': [ '-fno-lto' ],
 +          'ldflags': [],
          }],
-       ],
-       'actions': [
-@@ -2035,7 +2035,7 @@
+         ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+           'msvs_settings': {
+@@ -2043,7 +2043,7 @@
          ],
          'conditions': [
            ['enable_lto=="true"', {
 -            'cflags_cc': [ '-fno-lto' ],
 +            'cflags_cc': [],
            }],
-           # Changes in push_registers_asm.cc in V8 v12.8 requires using
-           # push_registers_masm on Windows even with ClangCL on x64
+           ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
+             'msvs_settings': {
