@@ -7,7 +7,7 @@ trap 'rm -rf "$workdir"' EXIT
 
 cd "$workdir"
 
-git clone --depth=1 --branch=v26.1.0 https://github.com/nodejs/node.git .
+git clone --depth=1 --branch=v26.2.0 https://github.com/nodejs/node.git .
 
 git apply "$OLDPWD/lto.diff"
 

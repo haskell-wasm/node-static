@@ -1,5 +1,5 @@
 diff --git a/common.gypi b/common.gypi
-index dbd6bf9d..22d76117 100644
+index c0a3d785..e245fa81 100644
 --- a/common.gypi
 +++ b/common.gypi
 @@ -189,9 +189,9 @@
@@ -65,7 +65,7 @@ index 4d8d16f0..3a770c37 100644
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
 diff --git a/node.gyp b/node.gyp
-index b129c3db..9c685df4 100644
+index c06e95a9..a5f5d274 100644
 --- a/node.gyp
 +++ b/node.gyp
 @@ -1229,7 +1229,7 @@

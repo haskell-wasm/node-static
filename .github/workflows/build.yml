@@ -27,7 +27,7 @@ jobs:
       - name: build-image
         run: |
           pushd "$(mktemp -d)"
-          curl -f -L https://github.com/tweag/rust-alpine-mimalloc/archive/refs/heads/master.tar.gz | tar xz --strip-components=1
+          curl -f -L https://github.com/haskell-wasm/rust-alpine-mimalloc/archive/refs/heads/master.tar.gz | tar xz --strip-components=1
           podman --remote build \
             --pull \
             --squash-all \
