@@ -7,19 +7,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  linux:
-    name: ${{ matrix.arch }}-linux
-    runs-on:
-      - ${{ matrix.runner_tag }}
-      - Linux
-      - podman
+  build:
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         include:
-          - arch: x86_64
-            runner_tag: X64
-          - arch: aarch64
-            runner_tag: ARM64
+          - os: ubuntu-24.04
+            arch: x86_64
+          - os: ubuntu-24.04-arm
+            arch: aarch64
     steps:
       - name: checkout
         uses: actions/checkout@v6
@@ -28,16 +25,15 @@ jobs:
         run: |
           pushd "$(mktemp -d)"
           curl -f -L https://github.com/haskell-wasm/rust-alpine-mimalloc/archive/refs/heads/master.tar.gz | tar xz --strip-components=1
-          podman --remote build \
+          podman build \
             --pull \
-            --squash-all \
             --tag rust:alpine-mimalloc \
             .
           popd
 
       - name: build-node
         run: |
-          podman --remote run \
+          podman run \
             --init \
             --rm \
             --volume $PWD:/workspace \
@@ -45,10 +41,8 @@ jobs:
             rust:alpine-mimalloc \
             /workspace/build-alpine.sh
 
-          podman --remote rmi rust:alpine-mimalloc
-
       - name: upload-artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: node-linux-${{ matrix.arch }}
           path: dist/node-v*.tar.xz
