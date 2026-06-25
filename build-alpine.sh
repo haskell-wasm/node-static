@@ -2,7 +2,7 @@
 
 set -eu
 
-node_ver=v26.3.1
+node_ver=v26.4.0
 
 apk add \
   clang \
