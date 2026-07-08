@@ -1,8 +1,8 @@
 diff --git a/common.gypi b/common.gypi
-index 36b4b113..dc8d1e0a 100644
+index bae09d8a..ab1bc7fb 100644
 --- a/common.gypi
 +++ b/common.gypi
-@@ -189,9 +189,9 @@
+@@ -190,9 +190,9 @@
                'MSVC_runtimeType': 2   # MultiThreadedDLL (/MD)
              }],
              ['clang==1', {
@@ -65,10 +65,10 @@ index 4e16412a..779d194b 100644
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
 diff --git a/node.gyp b/node.gyp
-index 1779a57c..401d94f6 100644
+index 8a6ab2cb..96be1797 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -1259,7 +1259,7 @@
+@@ -1264,7 +1264,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -77,7 +77,7 @@ index 1779a57c..401d94f6 100644
          }],
        ],
      }, # fuzz_env
-@@ -1307,7 +1307,7 @@
+@@ -1312,7 +1312,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -86,7 +86,7 @@ index 1779a57c..401d94f6 100644
          }],
        ],
      }, # fuzz_ClientHelloParser.cc
-@@ -1365,7 +1365,7 @@
+@@ -1370,7 +1370,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -95,7 +95,7 @@ index 1779a57c..401d94f6 100644
          }],
        ],
      }, # fuzz_strings
-@@ -1477,7 +1477,7 @@
+@@ -1482,7 +1482,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -104,7 +104,7 @@ index 1779a57c..401d94f6 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -1550,7 +1550,7 @@
+@@ -1555,7 +1555,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -113,7 +113,7 @@ index 1779a57c..401d94f6 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -1637,7 +1637,7 @@
+@@ -1642,7 +1642,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -122,7 +122,7 @@ index 1779a57c..401d94f6 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -1773,7 +1773,7 @@
+@@ -1778,7 +1778,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -185,10 +185,10 @@ index 5b47ebf1..a77f8de6 100644
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index 945aa0aa..38054a4e 100644
+index 193b8aeb..ed5263ca 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -1738,7 +1738,7 @@
+@@ -1751,7 +1751,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -197,7 +197,7 @@ index 945aa0aa..38054a4e 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -1810,7 +1810,7 @@
+@@ -1823,7 +1823,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -206,7 +206,7 @@ index 945aa0aa..38054a4e 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -1838,7 +1838,7 @@
+@@ -1851,7 +1851,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -215,7 +215,7 @@ index 945aa0aa..38054a4e 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -1887,7 +1887,7 @@
+@@ -1900,7 +1900,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -224,7 +224,7 @@ index 945aa0aa..38054a4e 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -1935,7 +1935,7 @@
+@@ -1948,7 +1948,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -233,7 +233,7 @@ index 945aa0aa..38054a4e 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -1965,7 +1965,7 @@
+@@ -1978,7 +1978,7 @@
          }],
          # Avoid excessive LTO
          ['enable_lto=="true"', {
@@ -242,7 +242,7 @@ index 945aa0aa..38054a4e 100644
          }],
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
-@@ -2043,7 +2043,7 @@
+@@ -2057,7 +2057,7 @@
          ],
          'conditions': [
            ['enable_lto=="true"', {
