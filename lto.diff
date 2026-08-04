@@ -1,8 +1,8 @@
 diff --git a/common.gypi b/common.gypi
-index bae09d8a..ab1bc7fb 100644
+index 8cf11845..b5f0051d 100644
 --- a/common.gypi
 +++ b/common.gypi
-@@ -190,9 +190,9 @@
+@@ -191,9 +191,9 @@
                'MSVC_runtimeType': 2   # MultiThreadedDLL (/MD)
              }],
              ['clang==1', {
@@ -15,7 +15,7 @@ index bae09d8a..ab1bc7fb 100644
            ],
          },
 diff --git a/deps/cares/configure b/deps/cares/configure
-index f91e2c95..84a09a59 100755
+index c2318a1c..a8ddbbcd 100755
 --- a/deps/cares/configure
 +++ b/deps/cares/configure
 @@ -17166,7 +17166,6 @@ _LT_EOF
@@ -185,7 +185,7 @@ index 5b47ebf1..a77f8de6 100644
          ['node_with_ltcg=="true" or enable_lto=="true" or enable_thin_lto=="true"', {
            'msvs_settings': {
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index 193b8aeb..ed5263ca 100644
+index 7953fa44..a4e8d83c 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
 @@ -1751,7 +1751,7 @@
