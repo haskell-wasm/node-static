@@ -1,5 +1,8 @@
 # `node-static`
 
-Highly opinionated nodejs build, fully statically linked with
-musl/mimalloc on linux, with LLVM ThinLTO. Don't use it in your own
-project unless you know what you're doing.
+Highly opinionated nodejs build:
+
+- `v8_enable_hugepage`
+- `v8_enable_wasm_gdb_remote_debugging`
+- Fully statically linked with musl/mimalloc on linux
+- LLVM ThinLTO
