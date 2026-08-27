@@ -2,7 +2,7 @@
 
 set -eu
 
-node_ver=v26.7.0
+node_ver=v26.8.1
 
 apk add \
   clang \
@@ -14,14 +14,13 @@ apk add \
 cd "$(mktemp -d)"
 
 curl -f -L https://nodejs.org/dist/$node_ver/node-$node_ver.tar.xz | tar xJ --strip-components=1
-patch -p1 -i /workspace/lto.diff
 patch -p1 -i /workspace/wasm-gdb-remote.diff
 
 make -j"$(nproc)" binary \
   AR=llvm-ar \
   CC=clang \
   CXX=clang++ \
-  CONFIG_FLAGS="--enable-lto --fully-static --v8-enable-hugepage" \
+  CONFIG_FLAGS="--fully-static --v8-enable-hugepage" \
   LDFLAGS=-Wl,-z,stack-size=8388608 \
   VARIATION="static"
 
