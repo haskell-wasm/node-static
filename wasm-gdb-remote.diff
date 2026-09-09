@@ -24,7 +24,7 @@ index a5227687..728e8fde 100644
          'defines': ['V8_DICT_PROPERTY_CONST_TRACKING',],
        }],
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index 32fc99e2..c4773dd1 100644
+index 7c7ebc8a..333c99d0 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
 @@ -709,6 +709,11 @@

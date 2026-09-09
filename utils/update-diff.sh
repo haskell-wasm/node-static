@@ -7,7 +7,7 @@ trap 'rm -rf "$workdir"' EXIT
 
 cd "$workdir"
 
-git clone --depth=1 --branch=v26.8.1 https://github.com/nodejs/node.git .
+git clone --depth=1 --branch=v26.8.2 https://github.com/nodejs/node.git .
 
 git apply "$OLDPWD/wasm-gdb-remote.diff"
 
