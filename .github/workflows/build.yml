@@ -8,20 +8,21 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-26.04
-            arch: x86_64
-          - os: ubuntu-26.04-arm
-            arch: aarch64
+          - runner: ubuntu-26.04
+          - runner: ubuntu-26.04-arm
+          - runner: xcode-27
+          - runner: macos-26-intel
     steps:
       - name: checkout
         uses: actions/checkout@v7
 
-      - name: build-image
+      - name: build-alpine-image
+        if: ${{ runner.os == 'Linux' }}
         run: |
           pushd "$(mktemp -d)"
           curl -f -L https://github.com/haskell-wasm/rust-alpine-mimalloc/archive/refs/heads/master.tar.gz | tar xz --strip-components=1
@@ -31,7 +32,8 @@ jobs:
             .
           popd
 
-      - name: build-node
+      - name: build-alpine
+        if: ${{ runner.os == 'Linux' }}
         run: |
           podman run \
             --init \
@@ -41,10 +43,15 @@ jobs:
             rust:alpine-mimalloc \
             /workspace/build-alpine.sh
 
+      - name: build-macos
+        if: ${{ runner.os == 'macOS' }}
+        run: |
+          ./build-macos.sh
+
       - name: upload-artifact
         uses: actions/upload-artifact@v7
         with:
-          name: node-linux-${{ matrix.arch }}
+          name: node-${{ runner.os }}-${{ runner.arch }}
           path: dist/node-v*.tar.xz
 
       - name: test-node
