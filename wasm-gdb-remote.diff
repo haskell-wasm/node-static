@@ -1,8 +1,8 @@
 diff --git a/tools/v8_gypfiles/features.gypi b/tools/v8_gypfiles/features.gypi
-index a5227687..728e8fde 100644
+index d656c749..7ad212f4 100644
 --- a/tools/v8_gypfiles/features.gypi
 +++ b/tools/v8_gypfiles/features.gypi
-@@ -321,6 +321,10 @@
+@@ -324,6 +324,10 @@
      # Sets -dV8_ENABLE_WEBASSEMBLY.
      'v8_enable_webassembly%': 1,
  
@@ -13,7 +13,7 @@ index a5227687..728e8fde 100644
      # Enable advanced BigInt algorithms, costing about 10-30 KiB binary size
      # depending on platform.
      'v8_advanced_bigint_algorithms%': 1,
-@@ -524,6 +528,9 @@
+@@ -531,6 +535,9 @@
        ['v8_enable_webassembly==1', {
          'defines': ['V8_ENABLE_WEBASSEMBLY',],
        }],
@@ -24,10 +24,10 @@ index a5227687..728e8fde 100644
          'defines': ['V8_DICT_PROPERTY_CONST_TRACKING',],
        }],
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index 7c7ebc8a..333c99d0 100644
+index 819dffb8..746afd14 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
-@@ -709,6 +709,11 @@
+@@ -722,6 +722,11 @@
                '<!@pymod_do_main(GN-scraper "<(V8_ROOT)/BUILD.gn"  "v8_header_set.\\"v8_internal_headers\\".*?v8_enable_webassembly.*?sources \\+= ")',
              ],
            }],
@@ -39,7 +39,7 @@ index 7c7ebc8a..333c99d0 100644
            ['v8_enable_wasm_simd256_revec==1', {
              'sources': [
                '<!@pymod_do_main(GN-scraper "<(V8_ROOT)/BUILD.gn"  "v8_header_set.\\"v8_internal_headers\\".*?v8_enable_wasm_simd256_revec.*?sources \\+= ")',
-@@ -1193,6 +1198,11 @@
+@@ -1211,6 +1216,11 @@
              '<!@pymod_do_main(GN-scraper "<(V8_ROOT)/BUILD.gn"  "\\"v8_base_without_compiler.*?v8_enable_webassembly.*?sources \\+= ")',
            ],
          }],
