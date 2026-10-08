@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-node_ver=v26.11.0
+node_ver=v26.11.1
 
 cd "$(mktemp -d)"
 
